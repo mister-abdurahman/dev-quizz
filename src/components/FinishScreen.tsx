@@ -1,13 +1,10 @@
 import React from "react";
+import { useQuizz } from "../contexts/quizzContext";
 
-export default function FinishScreen({
-  points,
-  totalPoints,
-  highScore,
-  dispatch,
-  bestTime,
-}: any) {
-  const percent = (points / totalPoints) * 100;
+export default function FinishScreen() {
+  const { points, totalPoints, highScore, dispatch, bestTime } = useQuizz();
+
+  const percent = (points! / totalPoints!) * 100;
 
   let emoji;
   console.log(bestTime);
@@ -26,8 +23,8 @@ export default function FinishScreen({
   }
   setEmoji(percent);
 
-  const min = Math.floor(bestTime / 60);
-  const sec = Math.floor(bestTime % 60);
+  const min = Math.floor(bestTime! / 60);
+  const sec = Math.floor(bestTime! % 60);
 
   return (
     <>
@@ -48,7 +45,7 @@ export default function FinishScreen({
       </p>
       <button
         className="bg-bg_dark px-[2rem] text-white py-[1rem] w-fit rounded-[10rem] hover:bg-bg_darkest hover:border-white hover:border-2 absolute right-0 -bottom-[15rem]"
-        onClick={() => dispatch({ type: "restart" })}
+        onClick={() => dispatch && dispatch({ type: "restart" })}
       >
         Restart
       </button>
