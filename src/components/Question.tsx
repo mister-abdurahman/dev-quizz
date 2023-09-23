@@ -7,9 +7,10 @@ interface questionType {
   points: number;
 }
 
-export default function Question({}: any) {
-  const { questions, dispatch, answer, index } = useQuizz();
-  const question = questions && questions?.at(index);
+export default function Question({}) {
+  const { questions, index } = useQuizz();
+  const question = questions && questions.at(index!);
+
   return (
     <div className="text-white mt-6">
       <h3 className="text-3xl font-bold">{question?.question}</h3>
