@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 
 interface questionType {
-  question: string,
-  correctOption: number,
-  options: string[],
-  points: number
+  question: string;
+  correctOption: number;
+  options: string[];
+  points: number;
 }
 interface contextType {
   questions?: questionType[];
@@ -19,6 +19,8 @@ interface contextType {
   totalPoints?: number;
   dispatch?: Function;
 }
+
+const API_URL = `https://dev-quizz-server.vercel.app`;
 
 const quizzContext = createContext<contextType>({});
 
@@ -129,7 +131,8 @@ function QuizzProviderContext({ children }: any) {
   useEffect(function () {
     async function fetchQuizz() {
       try {
-        const res = await fetch("http://localhost:4000/questions");
+        // const res = await fetch(`http:localhost:4000/questions`);
+        const res = await fetch(`${API_URL}/questions`);
         const resJson = await res.json();
         dispatch({ type: "dataRecieved", payload: resJson });
       } catch (error) {
